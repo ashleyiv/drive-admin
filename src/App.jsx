@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoginPage } from './pages/LoginPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { Layout } from './components/Layout';
 import { DashboardPage } from './pages/DashboardPage';
 import { UserAccountsPage } from './pages/UserAccountsPage';
@@ -13,19 +14,9 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('login');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    // Initialize data on app load
-    initializeData();
-  }, []);
-
-  const handleLogin = (email, password) => {
-    // Simple mock authentication - in production this would validate against a backend
-    if (email && password) {
-      setIsAuthenticated(true);
-      setCurrentPage('dashboard');
-      return { success: true };
-    }
-    return { success: false, error: 'Please enter both email and password' };
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    setCurrentPage('dashboard');
   };
 
   const handleLogout = () => {
@@ -33,46 +24,37 @@ export default function App() {
     setCurrentPage('login');
   };
 
-  if (!isAuthenticated) {
-    return <LoginPage onLogin={handleLogin} />;
-  }
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'dashboard':
-        return <DashboardPage />;
-      case 'users':
-        return (
-          <UserAccountsPage
-            onNavigateToArchive={() => setCurrentPage('archive')}
-          />
-        );
-      case 'archive':
-        return (
-          <ArchivePage
-            onNavigateBack={() => setCurrentPage('users')}
-          />
-        );
-      case 'reports':
-        return <DrowsinessReportsPage />;
-      case 'alerts':
-        return <ActiveAlertsPage />;
-      default:
-        return <DashboardPage />;
-    }
+  const navigate = (page) => {
+    setCurrentPage(page);
   };
+
+  if (!isAuthenticated) {
+    if (currentPage === 'forgot-password') {
+      return (
+        <ForgotPasswordPage
+          onBackToLogin={() => setCurrentPage('login')}
+        />
+      );
+    }
+
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        onForgotPassword={() => setCurrentPage('forgot-password')}
+      />
+    );
+  }
 
   return (
     <Layout
-  currentPage={currentPage}
-  onNavigate={setCurrentPage}
-  onLogout={() => {
-    setIsAuthenticated(false);
-    setCurrentPage('login');
-  }}
->
-  {renderPage()}
-</Layout>
-
+      currentPage={currentPage}
+      onNavigate={navigate}
+      onLogout={handleLogout}
+    >
+      {currentPage === 'dashboard' && <DashboardPage />}
+      {currentPage === 'users' && <UserAccountsPage />}
+      {currentPage === 'reports' && <DrowsinessReportsPage />}
+      {currentPage === 'alerts' && <ActiveAlertsPage />}
+    </Layout>
   );
 }
