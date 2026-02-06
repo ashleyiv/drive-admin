@@ -51,12 +51,10 @@ export function UserAccountsPage({ onNavigateToArchive } = {}) {
     switch (role) {
       case 'Admin':
         return 'text-purple-700';
-      case 'Moderator':
+      case 'Driver':
         return 'text-blue-700';
       case 'User':
         return 'text-gray-700';
-      case 'Guest':
-        return 'text-gray-500';
       default:
         return 'text-gray-700';
     }

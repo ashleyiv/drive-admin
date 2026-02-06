@@ -25,7 +25,7 @@ export const mockUsers = [
     email: "dwarren3@gmail.com",
     name: "dwarren5",
     status: "Active",
-    role: "User",
+    role: "Driver",
     joinedDate: "January 8, 2024",
     lastActive: "4 days ago"
   },
@@ -35,7 +35,7 @@ export const mockUsers = [
     email: "chloehhyes@gmail.com",
     name: "chloelilh",
     status: "Inactive",
-    role: "Guest",
+    role: "User",
     joinedDate: "October 5, 2021",
     lastActive: "10 days ago"
   },
@@ -55,7 +55,7 @@ export const mockUsers = [
     email: "belleclark@gmail.com",
     name: "bellecl",
     status: "Active",
-    role: "Moderator",
+    role: "Driver",
     joinedDate: "August 10, 2022",
     lastActive: "1 week ago"
   },
@@ -65,7 +65,7 @@ export const mockUsers = [
     email: "lucamitch@gmail.com",
     name: "lucamitch",
     status: "Active",
-    role: "Guest",
+    role: "Driver",
     joinedDate: "April 23, 2024",
     lastActive: "4 hours ago"
   },
@@ -95,7 +95,7 @@ export const mockUsers = [
     email: "mianaddlen@gmail.com",
     name: "mianaddlen",
     status: "Inactive",
-    role: "Guest",
+    role: "User",
     joinedDate: "December 31, 2021",
     lastActive: "4 months ago"
   },
